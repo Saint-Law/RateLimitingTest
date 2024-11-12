@@ -1,11 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Primitives;
-using System;
-using System.Net;
-using System.Threading.Tasks;
+
 
 namespace RateLimiting.Controllers
 {
@@ -38,7 +33,7 @@ namespace RateLimiting.Controllers
             // If rate limit is not exceeded, process the request
             var forecast = Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
-                Date = DateTime.Now.AddDays(index),
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
